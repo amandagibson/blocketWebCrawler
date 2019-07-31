@@ -17,7 +17,17 @@ function get_details($url)  {
   $title = $doc->getElementsByTagName("title");
   $title = $title->item(0)->nodeValue;
 
-  echo $title."\n";
+  $description = "";
+  $keywords = "";
+  $metas = $doc->getElementsByTagName("meta");
+  for ($i = 0; $i < $metas->length; $i++) {
+    $meta = $metas->item($i);
+
+    if ($meta->getAttribute("name") == ("description"))
+    $description = $meta->getAttribute("content");
+  }
+
+  echo $description;
 
 }
 
@@ -30,7 +40,7 @@ function follow_links($url) {
 
   $doc = new DOMdocument('1.0', 'UTF-8');
   $internalErrors = libxml_use_internal_errors(true);
-  $doc->loadHTML(file_get_contents($url, false, $context));
+  @$doc->loadHTML(@file_get_contents($url, false, $context));
   libxml_use_internal_errors($internalErrors);
 
   $linklist = $doc->getElementsByTagName("a");
