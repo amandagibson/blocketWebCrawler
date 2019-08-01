@@ -5,7 +5,7 @@ $start = "https://www.blocket.se/goteborg?ca=15";
 $already_crawled = array();
 
 function get_details($url)  {
-  $options = array('http'=>array('method'=>"GET", 'headers'=>"User-Agent: amandaBot/0.1\n"));
+  $options = array('http'=>array('method'=>"GET", 'headers'=>"User-Agent: maedayBot/0.1\n"));
 
   $context = stream_context_create($options);
 
@@ -17,8 +17,14 @@ function get_details($url)  {
   $title = $doc->getElementsByTagName("title");
   $title = $title->item(0)->nodeValue;
 
+  // $price = $doc->getElementsByTagName("vi_price");
+  // $price = $price->item(0)->nodeValue;
+
   $description = "";
+  // $keywords = "";
   $price = "";
+  $photos = "";
+
   $metas = $doc->getElementsByTagName("meta");
 
   for ($i = 0; $i < $metas->length; $i++) {
@@ -26,9 +32,21 @@ function get_details($url)  {
 
     if ($meta->getAttribute("name") == ("description"))
     $description = $meta->getAttribute("content");
+    // if ($meta->getAttribute("name") == ("keywords"))
+    // $keywords = $meta->getAttribute("content");
   }
 
-  echo $title."\n";
+  $divs = $doc->getElementsByTagName("div");
+
+  for ($i = 0; $i < $divs->length; $i++) {
+    $div = $divs->item($i);
+
+    if ($div->getAttribute("id") == ("vi_price"))
+    $price = $div->getAttribute(".innertext");
+
+  }
+
+  echo $price."\n"."\n";
 
 }
 

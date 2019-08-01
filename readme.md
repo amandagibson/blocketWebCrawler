@@ -2,7 +2,7 @@
 
 A web crawler that follows relevant links and gathers data about items for sale on the swedish website blocket.
 
-amandaBot0.1 retrieves:
+maedayBot0.1 retrieves:
 - Ad title
 - Price [WIP]
 - Description
