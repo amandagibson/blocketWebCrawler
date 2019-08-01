@@ -18,8 +18,9 @@ function get_details($url)  {
   $title = $title->item(0)->nodeValue;
 
   $description = "";
-  $keywords = "";
+  $price = "";
   $metas = $doc->getElementsByTagName("meta");
+
   for ($i = 0; $i < $metas->length; $i++) {
     $meta = $metas->item($i);
 
@@ -27,7 +28,7 @@ function get_details($url)  {
     $description = $meta->getAttribute("content");
   }
 
-  echo $description;
+  echo $title."\n";
 
 }
 
@@ -46,6 +47,7 @@ function follow_links($url) {
   $linklist = $doc->getElementsByTagName("a");
 
   foreach ($linklist as $link) {
+    if ($link->getAttribute("class") == ("item_link"))
     $l = $link->getAttribute("href");
 
     if (!in_array($l, $already_crawled)) {
