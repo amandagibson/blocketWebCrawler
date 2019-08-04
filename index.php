@@ -40,9 +40,10 @@ function get_details($url)  {
   foreach ($lis as $li) {
     if ($li->getAttribute("data-target") == ("#view_all_images_modal"))
     $photos = $li->getAttribute("href");
+
   }
 
-return '{ "Title": "'.$title.'", "Description": "'.str_replace("\n", "", $description).'", "Price": "'.str_replace("\n", "",$price).'", "Photos URL": "'.$photos.'" }';
+return '{ "Title": "'.$title.'", "Description": "'.str_replace("\n", "", $description).'", "Price": "'.str_replace("\n", "",$price).'", "Photos URL": "'.$photos.'", "Ad URL": "'.$url.'" }';
 
 }
 
@@ -68,8 +69,6 @@ function follow_links($url) {
       $already_crawled[] = $l;
 
       echo get_details($l)."\n";
-      //echo $l."\n";
-
     }
   }
 }
