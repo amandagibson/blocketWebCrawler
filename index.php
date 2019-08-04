@@ -18,7 +18,7 @@ function get_details($url)  {
   $title = $title->item(0)->nodeValue;
   $description = "";
   $price = "";
-  //$photos = "";
+  $photos = "";
 
   $metas = $doc->getElementsByTagName("meta");
 
@@ -35,7 +35,14 @@ function get_details($url)  {
     $price = $div->nodeValue;
   }
 
-return '{ "Title": "'.$title.'", "Description": "'.str_replace("\n", "", $description).'", "Price": "'.str_replace("\n", "",$price).'" }';
+  $lis = $doc->getElementsByTagName("a");
+
+  foreach ($lis as $li) {
+    if ($li->getAttribute("data-target") == ("#view_all_images_modal"))
+    $photos = $li->getAttribute("href");
+  }
+
+return '{ "Title": "'.$title.'", "Description": "'.str_replace("\n", "", $description).'", "Price": "'.str_replace("\n", "",$price).'", "Photos URL": "'.$photos.'" }';
 
 }
 
