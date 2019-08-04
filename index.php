@@ -30,16 +30,14 @@ function get_details($url)  {
     $description = $meta->getAttribute("content");
   }
 
-  $divs = $doc->getElementsByTagName("article");
+  $divs = $doc->getElementsByTagName("div");
 
-  for ($i = 0; $i < $divs->length; $i++) {
-    $div = $divs->item($i);
-
+  foreach ($divs as $div) {
     if ($div->getAttribute("id") == ("vi_price"))
     $price = $div->nodeValue;
   }
 
-return '{ "Title": "'.$title.'", "Description": "'.str_replace("\n", "", $description).'", "Price": "'.$price.'" }';
+return '{ "Title": "'.$title.'", "Description": "'.str_replace("\n", "", $description).'", "Price": "'.str_replace("\n", "",$price).'" }';
 
 }
 
