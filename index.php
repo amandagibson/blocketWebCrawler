@@ -16,10 +16,9 @@ function get_details($url)  {
 
   $title = $doc->getElementsByTagName("title");
   $title = $title->item(0)->nodeValue;
-
   $description = "";
   $price = "";
-  $photos = "";
+  //$photos = "";
 
   $metas = $doc->getElementsByTagName("meta");
 
