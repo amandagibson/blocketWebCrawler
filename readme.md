@@ -4,7 +4,7 @@ A web crawler that follows relevant links and gathers data about items for sale 
 
 maedayBot0.1 retrieves:
 - Ad title
-- Price [WIP]
+- Price
 - Description
 - Ad URL [WIP]
 - URL of the pictures [WIP]
