@@ -24,7 +24,6 @@ function get_details($url)  {
 
   for ($i = 0; $i < $metas->length; $i++) {
     $meta = $metas->item($i);
-
     if ($meta->getAttribute("name") == ("description"))
     $description = $meta->getAttribute("content");
   }
