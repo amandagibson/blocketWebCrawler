@@ -6,8 +6,8 @@ maedayBot0.1 retrieves:
 - Ad title
 - Price
 - Description
-- Ad URL [WIP]
-- URL of the pictures [WIP]
+- Ad URL
+- URL of the pictures [WIP- returning only the urls of ads that have more than one photo at the momemt.]
 
 
 Built with: [PHP](https://github.com/php) by [Amanda Gibson](https://github.com/amandagibson)
