@@ -17,11 +17,7 @@ function get_details($url)  {
   $title = $doc->getElementsByTagName("title");
   $title = $title->item(0)->nodeValue;
 
-  // $price = $doc->getElementsByTagName("vi_price");
-  // $price = $price->item(0)->nodeValue;
-
   $description = "";
-  // $keywords = "";
   $price = "";
   $photos = "";
 
@@ -32,28 +28,25 @@ function get_details($url)  {
 
     if ($meta->getAttribute("name") == ("description"))
     $description = $meta->getAttribute("content");
-    // if ($meta->getAttribute("name") == ("keywords"))
-    // $keywords = $meta->getAttribute("content");
   }
 
-  $divs = $doc->getElementsByTagName("div");
+  $divs = $doc->getElementsByTagName("article");
 
   for ($i = 0; $i < $divs->length; $i++) {
     $div = $divs->item($i);
 
     if ($div->getAttribute("id") == ("vi_price"))
-    $price = $div->getAttribute(".innertext");
-
+    $price = $div->nodeValue;
   }
 
-  echo $price."\n"."\n";
+return '{ "Title": "'.$title.'", "Description": "'.str_replace("\n", "", $description).'", "Price": "'.$price.'" }';
 
 }
 
 function follow_links($url) {
   global $already_crawled;
 
-  $options = array('http'=>array('method'=>"GET", 'headers'=>"User-Agent: amandaBot/0.1\n"));
+  $options = array('http'=>array('method'=>"GET", 'headers'=>"User-Agent: maedayBot/0.1\n"));
 
   $context = stream_context_create($options);
 
@@ -70,7 +63,8 @@ function follow_links($url) {
 
     if (!in_array($l, $already_crawled)) {
       $already_crawled[] = $l;
-      echo get_details($l);
+
+      echo get_details($l)."\n";
       //echo $l."\n";
 
     }
